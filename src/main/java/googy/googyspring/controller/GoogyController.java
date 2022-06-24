@@ -20,9 +20,39 @@ public class GoogyController {
         return "hello-mvc";
     }
 
+    @GetMapping("hello-string")
+    @ResponseBody
+    public String helloString(@RequestParam("name") String name) {
+        return "Hi " + name + "!";
+    }
+
+    static class Hello {
+        private String name;
+        private Integer age;
+
+        public String getName(){
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Integer getAge(){
+            return this.age;
+        }
+        public void setAge(Integer age){
+            this.age = age;
+        }
+
+    }
+
     @GetMapping("hello-api")
     @ResponseBody
-    public String helloApi(@RequestParam("name") String name) {
-        return "Hi " + name + "!";
+    public Hello helloApi(@RequestParam("name") String name, @RequestParam("age") Integer age) {
+        Hello hello = new Hello();
+        hello.setName(name);
+        hello.setAge(age);
+        return hello;
     }
 }
