@@ -2,13 +2,16 @@ package googy.googyspring.service;
 
 import googy.googyspring.domain.Member;
 import googy.googyspring.repository.MemberRepository;
-import googy.googyspring.repository.MemoryMemberRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public class MemberService {
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     /**
      * 회원가입
