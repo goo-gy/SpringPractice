@@ -1,4 +1,4 @@
-package googy.googyspring.repository;
+package googy.googyspring.domain.repository;
 
 import googy.googyspring.domain.Member;
 
