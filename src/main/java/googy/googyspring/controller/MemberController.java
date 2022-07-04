@@ -22,12 +22,12 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @GetMapping("member/register")
+    @GetMapping("/member/register")
     public String createForm() {
-        return "member/registerForm";
+        return "/member/registerForm";
     }
 
-    @PostMapping("member/register")
+    @PostMapping("/member/register")
     @ResponseBody
     public RedirectView memberRegister(MemberForm form) {
         Member member = new Member();
@@ -39,10 +39,10 @@ public class MemberController {
         return redirectView;
     }
 
-    @GetMapping("members")
+    @GetMapping("/members")
     public String members(Model model) {
         List<Member> memberList = memberService.findMembers();
         model.addAttribute("memberList", memberList);
-        return "member/list";
+        return "/member/list";
     }
 }
