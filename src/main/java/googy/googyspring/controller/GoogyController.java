@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class GoogyController {
-    @GetMapping("hello")
+    @GetMapping("/hello")
     public String hello(Model model) {
         model.addAttribute("data", "hello!!");
-        return "hello";
+        return "/hello";
     }
 
-    @GetMapping("hello-mvc")
+    @GetMapping("/hello-mvc")
     public String helloMvc(@RequestParam(value = "name", required = false) String name, Model model) {
         model.addAttribute("name", name);
-        return "hello-mvc";
+        return "/hello-mvc";
     }
 
-    @GetMapping("hello-string")
+    @GetMapping("/hello-string")
     @ResponseBody
     public String helloString(@RequestParam("name") String name) {
         return "Hi " + name + "!";
@@ -47,7 +47,7 @@ public class GoogyController {
 
     }
 
-    @GetMapping("hello-api")
+    @GetMapping("/hello-api")
     @ResponseBody
     public Hello helloApi(@RequestParam("name") String name, @RequestParam("age") Integer age) {
         Hello hello = new Hello();
