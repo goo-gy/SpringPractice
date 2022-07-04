@@ -5,15 +5,16 @@ import googy.googyspring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
 @Controller
 public class MemberController {
-    private final MemberService memberService;
-    static Long id = 1L;
+    private MemberService memberService;
+    static Long id = 0L;
 
     @Autowired
     public MemberController(MemberService memberService) {
@@ -21,20 +22,25 @@ public class MemberController {
     }
 
     @GetMapping("member/register")
-    @ResponseBody
-    Member memberAPI(@RequestParam("name") String name) {
-        Member member = new Member();
-        member.setId(id);
-        id++;
-        member.setName(name);
-        memberService.join(member);
-        return member;
+    public String createForm() {
+        return "member/registerForm";
     }
 
+    @PostMapping("member/register")
+    @ResponseBody
+    public RedirectView memberRegister(MemberForm form) {
+        Member member = new Member();
+        member.setName(form.getName());
+        memberService.join(member);
+
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("/");
+        return redirectView;
+    }
 
     @GetMapping("members")
     @ResponseBody
-    public List<Member> memberAPI() {
+    public List<Member> members() {
         List<Member> memberList =  memberService.findMembers();
         return memberList;
     }

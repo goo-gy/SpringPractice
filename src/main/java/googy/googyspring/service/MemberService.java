@@ -1,7 +1,7 @@
 package googy.googyspring.service;
 
 import googy.googyspring.domain.Member;
-import googy.googyspring.domain.repository.MemberRepository;
+import googy.googyspring.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

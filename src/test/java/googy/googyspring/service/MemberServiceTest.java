@@ -1,7 +1,7 @@
 package googy.googyspring.service;
 
 import googy.googyspring.domain.Member;
-import googy.googyspring.domain.repository.MemoryMemberRepository;
+import googy.googyspring.repository.MemoryMemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
