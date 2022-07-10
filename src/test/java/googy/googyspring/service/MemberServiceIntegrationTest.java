@@ -1,23 +1,22 @@
 package googy.googyspring.service;
 
 import googy.googyspring.domain.Member;
-import googy.googyspring.repository.MemoryMemberRepository;
+import googy.googyspring.repository.MemberRepository;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class MemberServiceTest {
-
-    MemoryMemberRepository memberRepository = new MemoryMemberRepository();
-    MemberService memberService = new MemberService(memberRepository);
-
-        
-    @AfterEach
-    public void afterEach(){
-        memberRepository.clearStore();
-    }
+@SpringBootTest
+@Transactional
+class MemberServiceIntegrationTest {
+    @Autowired
+    MemberService memberService;
+    @Autowired
+    MemberRepository memberRepository;
 
     @Test
     void join() {
@@ -44,28 +43,9 @@ class MemberServiceTest {
         member2.setName("googy");
 
         // when
-
         memberService.join(member1);
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
         Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
         System.out.println("join_duplicate success");
-//        try{
-//            memberService.join(member2);
-//            fail();
-//        } catch (IllegalStateException e) {
-//            Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
-//            System.out.println("join_duplicate success");
-//        }
-
-        // then
-
-    }
-
-    @Test
-    void findMembers() {
-    }
-
-    @Test
-    void findOne() {
     }
 }
