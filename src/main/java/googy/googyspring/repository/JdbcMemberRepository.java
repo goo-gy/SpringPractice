@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-@Repository
+//@Repository
 public class JdbcMemberRepository  implements MemberRepository {
     private DataSource dataSource;
 

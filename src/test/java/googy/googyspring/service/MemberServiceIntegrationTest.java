@@ -20,11 +20,10 @@ class MemberServiceIntegrationTest {
     MemberRepository memberRepository;
 
     @Test
-    @Commit
     void join() {
         // given
         Member member = new Member();
-        member.setName("abcdefasd");
+        member.setName("googy");
 
         // when
         Long saveId = memberService.join(member);
